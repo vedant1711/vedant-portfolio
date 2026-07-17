@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vedant Somani — Portfolio
 
-## Getting Started
+Personal portfolio for [Vedant Somani](https://github.com/vedant1711) — Text Mining Research Analyst at the UW eScience Institute, software developer, and data scientist.
 
-First, run the development server:
+Built with **Next.js 16** (App Router), **Tailwind CSS v4**, and **Framer Motion**. Fully static — no server or database required.
+
+## Highlights
+
+- NER-annotation-styled hero (a nod to spaCy/displaCy and text mining)
+- Light & dark themes (system-aware, with a manual toggle persisted in localStorage)
+- Experience rendered as a vertical timeline
+- Projects pulled from GitHub with live-demo links
+- Skill grid with real technology logos (devicon / Simple Icons, served locally)
+
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Deploy
 
-To learn more about Next.js, take a look at the following resources:
+The easiest path is [Vercel](https://vercel.com):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Push this folder to a GitHub repository.
+2. In Vercel, **Add New → Project**, import the repo, and deploy — zero config needed.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Any platform that runs Next.js (Netlify, Cloudflare, Render, etc.) works too.
 
-## Deploy on Vercel
+## Editing content
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+All copy lives in one place: [`lib/data.ts`](lib/data.ts) — profile, experience, projects, skills, achievements, and education. Photos are in `public/media/`, skill logos in `public/logos/`.

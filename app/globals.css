@@ -1,26 +1,156 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ground: #f6f4ee;
+  --surface: #fffefb;
+  --ink: #1b2129;
+  --muted: #5c6570;
+  --line: #e3dfd4;
+  --accent: #0f766e;
+  --accent-ink: #0b5d57;
+  --accent-soft: rgba(15, 118, 110, 0.09);
+
+  /* displaCy-inspired entity tag palette */
+  --tag-person: #fde8c4;
+  --tag-person-ink: #8a5a12;
+  --tag-role: #e2dcfd;
+  --tag-role-ink: #4c3a99;
+  --tag-org: #c8f0ee;
+  --tag-org-ink: #0d5f5a;
+  --tag-loc: #fadfe3;
+  --tag-loc-ink: #96354a;
+}
+
+.dark {
+  --ground: #0e141b;
+  --surface: #151d26;
+  --ink: #e9ebed;
+  --muted: #98a3af;
+  --line: #263140;
+  --accent: #2dd4bf;
+  --accent-ink: #5eead4;
+  --accent-soft: rgba(45, 212, 191, 0.1);
+
+  --tag-person: rgba(245, 195, 120, 0.18);
+  --tag-person-ink: #f0c076;
+  --tag-role: rgba(170, 156, 252, 0.18);
+  --tag-role-ink: #b7aafb;
+  --tag-org: rgba(122, 236, 236, 0.16);
+  --tag-org-ink: #79dcd6;
+  --tag-loc: rgba(250, 160, 175, 0.16);
+  --tag-loc-ink: #eb9daf;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-manrope);
+  --font-mono: var(--font-plex-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--ground);
+}
+
+/* NER-style entity annotation used in the hero */
+.ent {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4em;
+  padding: 0.02em 0.28em;
+  border-radius: 0.3rem;
+  white-space: nowrap;
+  transition: transform 0.18s ease;
+}
+
+.ent:hover {
+  transform: translateY(-2px);
+}
+
+.ent-label {
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 0.32em;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  transform: translateY(-0.35em);
+}
+
+.ent-person {
+  background: var(--tag-person);
+}
+.ent-person .ent-label {
+  color: var(--tag-person-ink);
+}
+.ent-role {
+  background: var(--tag-role);
+}
+.ent-role .ent-label {
+  color: var(--tag-role-ink);
+}
+.ent-org {
+  background: var(--tag-org);
+}
+.ent-org .ent-label {
+  color: var(--tag-org-ink);
+}
+.ent-loc {
+  background: var(--tag-loc);
+}
+.ent-loc .ent-label {
+  color: var(--tag-loc-ink);
+}
+
+/* decorative stage photos: harmonized with the theme, faded into the background */
+.stage-photo {
+  filter: saturate(0.85) sepia(0.04);
+  mask-image: linear-gradient(to bottom, black 62%, transparent 99%);
+  -webkit-mask-image: linear-gradient(to bottom, black 62%, transparent 99%);
+}
+
+.dark .stage-photo {
+  filter: saturate(0.85);
+}
+
+/* subtle grid backdrop for the hero */
+.hero-grid {
+  background-image: linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 20%, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(
+    ellipse 90% 70% at 50% 20%,
+    black 30%,
+    transparent 75%
+  );
+  opacity: 0.55;
 }
