@@ -3,44 +3,29 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --ground: #f6f4ee;
-  --surface: #fffefb;
-  --ink: #1b2129;
-  --muted: #5c6570;
-  --line: #e3dfd4;
-  --accent: #0f766e;
-  --accent-ink: #0b5d57;
-  --accent-soft: rgba(15, 118, 110, 0.09);
-
-  /* displaCy-inspired entity tag palette */
-  --tag-person: #fde8c4;
-  --tag-person-ink: #8a5a12;
-  --tag-role: #e2dcfd;
-  --tag-role-ink: #4c3a99;
-  --tag-org: #c8f0ee;
-  --tag-org-ink: #0d5f5a;
-  --tag-loc: #fadfe3;
-  --tag-loc-ink: #96354a;
+  --ground: #f3f1ea;
+  --surface: #fbf9f3;
+  --ink: #16150f;
+  --muted: #6a685e;
+  --faint: #97948a;
+  --line: #d9d5c8;
+  --line-soft: #e6e2d6;
+  --accent: #d8402a;
+  --accent-ink: #b83320;
+  --accent-soft: rgba(216, 64, 42, 0.08);
 }
 
 .dark {
-  --ground: #0e141b;
-  --surface: #151d26;
-  --ink: #e9ebed;
-  --muted: #98a3af;
-  --line: #263140;
-  --accent: #2dd4bf;
-  --accent-ink: #5eead4;
-  --accent-soft: rgba(45, 212, 191, 0.1);
-
-  --tag-person: rgba(245, 195, 120, 0.18);
-  --tag-person-ink: #f0c076;
-  --tag-role: rgba(170, 156, 252, 0.18);
-  --tag-role-ink: #b7aafb;
-  --tag-org: rgba(122, 236, 236, 0.16);
-  --tag-org-ink: #79dcd6;
-  --tag-loc: rgba(250, 160, 175, 0.16);
-  --tag-loc-ink: #eb9daf;
+  --ground: #0c0c0a;
+  --surface: #141310;
+  --ink: #f0eee6;
+  --muted: #9d9a8e;
+  --faint: #6f6c62;
+  --line: #262419;
+  --line-soft: #1c1b13;
+  --accent: #f4633e;
+  --accent-ink: #f8815f;
+  --accent-soft: rgba(244, 99, 62, 0.1);
 }
 
 @theme inline {
@@ -48,17 +33,20 @@
   --color-surface: var(--surface);
   --color-ink: var(--ink);
   --color-muted: var(--muted);
+  --color-faint: var(--faint);
   --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
   --color-accent-soft: var(--accent-soft);
-  --font-display: var(--font-fraunces);
-  --font-sans: var(--font-manrope);
+  --font-display: var(--font-grotesk);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-plex-mono);
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -70,87 +58,151 @@ html {
 body {
   background: var(--ground);
   color: var(--ink);
-  font-family: var(--font-manrope), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   overflow-x: clip;
+}
+
+@media (min-width: 640px) {
+  body {
+    font-size: 1.125rem;
+  }
 }
 
 ::selection {
   background: var(--accent);
-  color: var(--ground);
+  color: #fff;
 }
 
-/* NER-style entity annotation used in the hero */
-.ent {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.4em;
-  padding: 0.02em 0.28em;
-  border-radius: 0.3rem;
-  white-space: nowrap;
-  transition: transform 0.18s ease;
-}
-
-.ent:hover {
-  transform: translateY(-2px);
-}
-
-.ent-label {
-  font-family: var(--font-plex-mono), monospace;
-  font-size: 0.32em;
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-grotesk), system-ui, sans-serif;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* --- Swiss framed container: vertical rules that run the full page height --- */
+.frame {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  border-inline: 1px solid var(--line);
+}
+
+/* horizontal section divider */
+.rule {
+  border-top: 1px solid var(--line);
+}
+
+/* monospace metadata label */
+.mono-label {
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  opacity: 0.85;
-  transform: translateY(-0.35em);
+  color: var(--faint);
 }
 
-.ent-person {
-  background: var(--tag-person);
-}
-.ent-person .ent-label {
-  color: var(--tag-person-ink);
-}
-.ent-role {
-  background: var(--tag-role);
-}
-.ent-role .ent-label {
-  color: var(--tag-role-ink);
-}
-.ent-org {
-  background: var(--tag-org);
-}
-.ent-org .ent-label {
-  color: var(--tag-org-ink);
-}
-.ent-loc {
-  background: var(--tag-loc);
-}
-.ent-loc .ent-label {
-  color: var(--tag-loc-ink);
+/* faint column-grid backdrop, fixed behind everything */
+.grid-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--line-soft) 0,
+    var(--line-soft) 1px,
+    transparent 1px,
+    transparent max(6.25%, 80px)
+  );
+  opacity: 0.5;
+  mask-image: linear-gradient(180deg, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
 }
 
-/* decorative stage photos: harmonized with the theme, faded into the background */
+/* subtle paper grain for a handcrafted, non-flat surface */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.dark .grain {
+  opacity: 0.05;
+}
+
+/* horizontal marquee (skills ticker) */
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: inline-flex;
+  animation: marquee-x 40s linear infinite;
+  will-change: transform;
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* animated underline for text links */
+.link-underline {
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-size: 0% 1.5px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s ease;
+}
+
+.link-underline:hover {
+  background-size: 100% 1.5px;
+}
+
+/* decorative stage photos: harmonized with the theme */
 .stage-photo {
-  filter: saturate(0.85) sepia(0.04);
-  mask-image: linear-gradient(to bottom, black 62%, transparent 99%);
-  -webkit-mask-image: linear-gradient(to bottom, black 62%, transparent 99%);
+  filter: saturate(0.92) contrast(1.02);
 }
 
 .dark .stage-photo {
-  filter: saturate(0.85);
-}
-
-/* subtle grid backdrop for the hero */
-.hero-grid {
-  background-image: linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse 90% 70% at 50% 20%, black 30%, transparent 75%);
-  -webkit-mask-image: radial-gradient(
-    ellipse 90% 70% at 50% 20%,
-    black 30%,
-    transparent 75%
-  );
-  opacity: 0.55;
+  filter: saturate(0.85) brightness(0.92);
 }

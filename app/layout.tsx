@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
-import { Fraunces, Manrope, IBM_Plex_Mono } from "next/font/google";
+import { Space_Grotesk, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import SiteNav from "@/components/SiteNav";
+import SiteFooter from "@/components/SiteFooter";
+import ScrollProgress from "@/components/ScrollProgress";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const grotesk = Space_Grotesk({
+  variable: "--font-grotesk",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const manrope = Manrope({
-  variable: "--font-manrope",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -19,13 +23,17 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vedant Somani — Software Developer · Data Scientist · NLP",
+  metadataBase: new URL("https://vedant-portfolio.vercel.app"),
+  title: {
+    default: "Vedant Somani — ML / NLP Engineer",
+    template: "%s — Vedant Somani",
+  },
   description:
-    "Portfolio of Vedant Somani — Text Mining Research Analyst at the UW eScience Institute, building NLP pipelines, agentic AI systems, and full-stack products.",
+    "Vedant Somani is a machine learning and NLP engineer at the UW eScience Institute. He builds text mining pipelines, agentic AI systems, and full-stack products.",
   openGraph: {
-    title: "Vedant Somani — Software Developer · Data Scientist · NLP",
+    title: "Vedant Somani — ML / NLP Engineer",
     description:
-      "Text Mining Research Analyst at the UW eScience Institute, building NLP pipelines, agentic AI systems, and full-stack products.",
+      "Machine learning and NLP engineer at the UW eScience Institute, building text mining pipelines, agentic AI systems, and full-stack products.",
     type: "website",
   },
 };
@@ -41,11 +49,16 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${fraunces.variable} ${manrope.variable} ${plexMono.variable} h-full antialiased`}
+      className={`${grotesk.variable} ${inter.variable} ${plexMono.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="flex min-h-dvh flex-col">
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
-        {children}
+        <div className="grid-backdrop" aria-hidden="true" />
+        <div className="grain" aria-hidden="true" />
+        <ScrollProgress />
+        <SiteNav />
+        <main className="flex-1 pt-14 sm:pt-16">{children}</main>
+        <SiteFooter />
       </body>
     </html>
   );

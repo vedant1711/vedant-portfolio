@@ -13,24 +13,26 @@ export default function Gallery({
   const [active, setActive] = useState(0);
 
   return (
-    <figure>
-      <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-line bg-ground">
-        <img
-          src={images[active]}
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-          className="absolute inset-0 h-full w-full scale-110 object-cover opacity-60 blur-lg saturate-[0.85]"
-        />
-        <img
-          src={images[active]}
-          alt={`${alt}${images.length > 1 ? ` (photo ${active + 1} of ${images.length})` : ""}`}
-          loading="lazy"
-          className="relative h-full w-full object-contain"
-        />
-      </div>
+    <figure className="relative aspect-[16/10] overflow-hidden border-b border-line bg-ground">
+      <img
+        src={images[active]}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        className="absolute inset-0 h-full w-full scale-110 object-cover opacity-55 blur-xl saturate-[0.8]"
+      />
+      <img
+        src={images[active]}
+        alt={`${alt}${images.length > 1 ? ` (photo ${active + 1} of ${images.length})` : ""}`}
+        loading="lazy"
+        className="relative h-full w-full object-contain"
+      />
       {images.length > 1 && (
-        <div className="mt-2 flex gap-2" role="tablist" aria-label="Post photos">
+        <div
+          className="absolute inset-x-0 bottom-0 flex gap-1.5 bg-gradient-to-t from-black/45 to-transparent p-2"
+          role="tablist"
+          aria-label="Photos"
+        >
           {images.map((img, i) => (
             <button
               key={img}
@@ -38,10 +40,10 @@ export default function Gallery({
               aria-selected={i === active}
               aria-label={`Photo ${i + 1}`}
               onClick={() => setActive(i)}
-              className={`h-12 w-16 overflow-hidden rounded-md border transition-all ${
+              className={`h-10 w-14 overflow-hidden border transition-all ${
                 i === active
                   ? "border-accent opacity-100"
-                  : "border-line opacity-55 hover:opacity-90"
+                  : "border-white/40 opacity-70 hover:opacity-100"
               }`}
             >
               <img src={img} alt="" loading="lazy" className="h-full w-full object-cover" />
