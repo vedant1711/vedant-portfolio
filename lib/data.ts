@@ -26,9 +26,9 @@ export const profile = {
     { k: "Status", v: "Open to 2027 roles" },
   ],
   stats: [
-    { value: "3+", label: "Years building" },
+    { value: "4+", label: "Years building" },
     { value: "15+", label: "Projects shipped" },
-    { value: "2", label: "IEEE publications" },
+    { value: "2", label: "Publications" },
     { value: "4.0", label: "GPA at UW" },
   ],
   resumes: [
