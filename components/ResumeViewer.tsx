@@ -1,8 +1,10 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
-import { useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { profile } from "@/lib/data";
+
+const ZOOMS = [1, 1.5, 2, 3];
 
 const DownloadIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -18,11 +20,41 @@ const ExternalIcon = () => (
 
 export default function ResumeViewer() {
   const [active, setActive] = useState(0);
+  const [zoom, setZoom] = useState(1);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const current = profile.resumes[active];
+  const zoomed = zoom > 1;
+
+  // keep the same spot in view when the magnification changes, instead of
+  // snapping back to the top-left corner
+  const applyZoom = useCallback((next: number) => {
+    const el = scrollRef.current;
+    const prevCentre = el
+      ? {
+          x: (el.scrollLeft + el.clientWidth / 2) / Math.max(el.scrollWidth, 1),
+          y: (el.scrollTop + el.clientHeight / 2) / Math.max(el.scrollHeight, 1),
+        }
+      : null;
+
+    setZoom(next);
+
+    requestAnimationFrame(() => {
+      const node = scrollRef.current;
+      if (!node || !prevCentre) return;
+      node.scrollLeft = prevCentre.x * node.scrollWidth - node.clientWidth / 2;
+      node.scrollTop = prevCentre.y * node.scrollHeight - node.clientHeight / 2;
+    });
+  }, []);
+
+  const step = (dir: 1 | -1) => {
+    const i = ZOOMS.indexOf(zoom);
+    const at = i === -1 ? 0 : i;
+    applyZoom(ZOOMS[Math.min(ZOOMS.length - 1, Math.max(0, at + dir))]);
+  };
 
   return (
     <div>
-      {/* controls */}
+      {/* variant + file actions */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div
           className="inline-flex rounded-md border border-line p-1"
@@ -34,11 +66,12 @@ export default function ResumeViewer() {
               key={r.short}
               role="tab"
               aria-selected={i === active}
-              onClick={() => setActive(i)}
+              onClick={() => {
+                setActive(i);
+                setZoom(1); // a new resume always starts fitted to the width
+              }}
               className={`rounded px-4 py-2 text-sm font-medium transition-colors ${
-                i === active
-                  ? "bg-accent text-white"
-                  : "text-muted hover:text-ink"
+                i === active ? "bg-accent text-white" : "text-muted hover:text-ink"
               }`}
             >
               {r.label}
@@ -66,32 +99,65 @@ export default function ResumeViewer() {
         </div>
       </div>
 
-      {/* the resume itself, rendered as the page it is. on narrow screens the
-          page stays at a legible width and pans sideways instead of shrinking
-          into unreadable type. */}
-      <figure className="mt-8">
-        <div className="mx-auto max-w-3xl overflow-x-auto">
-          <a
-            href={current.file}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Open the ${current.label} resume PDF`}
-            className="block w-[620px] border border-line bg-white shadow-[0_1px_0_var(--line),0_24px_60px_-32px_rgba(0,0,0,0.45)] transition-colors hover:border-accent/60 sm:w-full"
+      {/* zoom bar */}
+      <div className="mx-auto mt-8 flex max-w-3xl items-center justify-between gap-4">
+        <p className="font-mono text-[11px] uppercase tracking-wider text-faint">
+          {zoomed ? "Drag to pan" : "Fitted to width"}
+        </p>
+        <div className="flex items-center gap-1 rounded-md border border-line p-1">
+          <button
+            onClick={() => step(-1)}
+            disabled={zoom === ZOOMS[0]}
+            aria-label="Zoom out"
+            className="flex h-8 w-8 items-center justify-center rounded text-ink transition-colors hover:bg-accent-soft hover:text-accent disabled:pointer-events-none disabled:opacity-35"
           >
-            <img
-              key={current.preview}
-              src={current.preview}
-              alt={`${profile.name} resume, ${current.label} version`}
-              width={1428}
-              height={2021}
-              className="h-auto w-full"
-            />
-          </a>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
+              <path d="M5 12h14" />
+            </svg>
+          </button>
+          <button
+            onClick={() => applyZoom(1)}
+            aria-label="Reset zoom to fit width"
+            className="min-w-[3.5rem] rounded px-2 py-1 font-mono text-[12px] font-medium text-muted transition-colors hover:text-accent"
+          >
+            {Math.round(zoom * 100)}%
+          </button>
+          <button
+            onClick={() => step(1)}
+            disabled={zoom === ZOOMS[ZOOMS.length - 1]}
+            aria-label="Zoom in"
+            className="flex h-8 w-8 items-center justify-center rounded text-ink transition-colors hover:bg-accent-soft hover:text-accent disabled:pointer-events-none disabled:opacity-35"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* the resume page. at 100% the image is exactly the container width, so
+          nothing ever scrolls sideways unless the reader zooms in on purpose. */}
+      <figure className="mt-3">
+        <div
+          ref={scrollRef}
+          className={`mx-auto max-w-3xl border border-line bg-white shadow-[0_1px_0_var(--line),0_24px_60px_-32px_rgba(0,0,0,0.45)] ${
+            zoomed ? "max-h-[78dvh] overflow-auto overscroll-contain" : "overflow-hidden"
+          }`}
+        >
+          <img
+            src={current.preview}
+            alt={`${profile.name} resume, ${current.label} version`}
+            width={1428}
+            height={2021}
+            onDoubleClick={() => applyZoom(zoomed ? 1 : 2)}
+            style={{ width: `${zoom * 100}%`, maxWidth: "none" }}
+            className={`block h-auto select-none ${zoomed ? "cursor-grab" : "cursor-zoom-in"}`}
+            draggable={false}
+          />
         </div>
         <figcaption className="mx-auto mt-4 max-w-3xl font-mono text-[11px] uppercase tracking-wider text-faint">
-          {current.label} resume · one page ·{" "}
-          <span className="sm:hidden">swipe to read, tap to open the PDF</span>
-          <span className="hidden sm:inline">click to open the PDF</span>
+          {current.label} resume · one page · double-tap to zoom, or open the PDF
+          above
         </figcaption>
       </figure>
     </div>
