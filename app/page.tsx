@@ -77,9 +77,9 @@ export default function Home() {
             {/* spec card */}
             <Reveal delay={0.12}>
               <div className="border border-line bg-surface/80 backdrop-blur-sm">
-                <div className="aspect-[5/4] overflow-hidden border-b border-line bg-ground sm:aspect-[16/10] lg:aspect-[5/4]">
+                <div className="aspect-[5/4] overflow-hidden border-b border-line bg-white sm:aspect-[16/10] lg:aspect-[5/4]">
                   <img
-                    src="/media/vedant.jpeg"
+                    src="/media/vedant-headshot.jpg"
                     alt="Vedant Somani"
                     className="h-full w-full object-cover object-top"
                   />

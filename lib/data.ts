@@ -430,10 +430,12 @@ export const achievements: Achievement[] = [
     linkLabel: "Read the story",
   },
   {
-    title: "Instructor, AI in Practice Summer Institute",
+    title: "Instructed at the AI in Practice Summer Institute",
     detail:
-      "Taught applied AI workflows to researchers and library staff at the University of Washington.",
+      "Led the sequence-models track — RNNs, LSTMs, and transformers — for researchers, postdocs, PhD students, and faculty at the UW eScience Institute.",
     kind: "award",
+    link: "https://ai-in-practice.uwescience.org/",
+    linkLabel: "Course site",
   },
   {
     title: "iEngage Hackathon",
@@ -489,6 +491,23 @@ export type Highlight = {
 };
 
 export const highlights: Highlight[] = [
+  {
+    title: "Instructing at the AI in Practice Summer Institute",
+    date: "Aug 2026",
+    description:
+      "Five days, 9 to 5, in a room of researchers, postdocs, PhD students, and faculty working through what it actually takes to build and evaluate AI models on their own problems. The sequence track was mine to lead: RNNs and LSTMs on time series, then transformers and the attention mechanism, built up from why a fixed context vector runs out of room, through query, key, and value, to the full scaled dot-product. Thanks to Valentina Staneva, Anthony Arendt, and the eScience team for putting it together.",
+    link: "https://www.linkedin.com/feed/update/urn:li:activity:7491508474527461376/",
+    images: [
+      "/media/linkedin/aip-1.jpg",
+      "/media/linkedin/aip-2.jpg",
+      "/media/linkedin/aip-3.jpg",
+      "/media/linkedin/aip-4.jpg",
+      "/media/linkedin/aip-5.jpg",
+    ],
+    imageAlt:
+      "Instructing the sequence-models and transformers sessions at the AI in Practice Summer Institute",
+    tags: ["Teaching", "Transformers", "UW eScience"],
+  },
   {
     title: "Investment round finalist at the Dempsey Startup Competition",
     date: "May 2026",
