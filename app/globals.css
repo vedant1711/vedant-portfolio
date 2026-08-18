@@ -198,6 +198,29 @@ a {
   background-size: 100% 1.5px;
 }
 
+/* Backdrop for the cut-out hero portrait. The subject is black hair over a
+   black suit, so the plate has to stay clearly lighter than both in either
+   theme or the body disappears into the card. */
+.portrait-plate {
+  background:
+    radial-gradient(
+      74% 62% at 50% 30%,
+      rgba(255, 255, 255, 0.85),
+      transparent 70%
+    ),
+    linear-gradient(180deg, #efece2 0%, #e6e2d5 100%);
+}
+
+.dark .portrait-plate {
+  background:
+    radial-gradient(
+      74% 62% at 50% 30%,
+      rgba(255, 255, 255, 0.1),
+      transparent 70%
+    ),
+    linear-gradient(180deg, #3b372e 0%, #2a2721 100%);
+}
+
 /* decorative stage photos: harmonized with the theme */
 .stage-photo {
   filter: saturate(0.92) contrast(1.02);

@@ -77,11 +77,17 @@ export default function Home() {
             {/* spec card */}
             <Reveal delay={0.12}>
               <div className="border border-line bg-surface/80 backdrop-blur-sm">
-                <div className="aspect-[5/4] overflow-hidden border-b border-line bg-white sm:aspect-[16/10] lg:aspect-[5/4]">
+                {/* Fixed heights rather than an aspect ratio: the card spans the
+                    full width between sm and lg, and a ratio would blow the
+                    portrait up to ~575px there. object-contain keeps the whole
+                    portrait visible at every breakpoint, uncropped. */}
+                <div className="portrait-plate h-[290px] overflow-hidden border-b border-line sm:h-[380px] lg:h-[320px] xl:h-[350px]">
                   <img
-                    src="/media/vedant-headshot.jpg"
+                    src="/media/vedant-headshot.webp"
                     alt="Vedant Somani"
-                    className="h-full w-full object-cover object-top"
+                    width={1000}
+                    height={1000}
+                    className="h-full w-full object-contain object-bottom"
                   />
                 </div>
                 <dl>
