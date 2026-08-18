@@ -87,7 +87,7 @@ export default function ProjectCard({
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-ink transition-colors hover:text-accent"
               >
-                Live <ExternalIcon />
+                {project.liveLabel ?? "Live"} <ExternalIcon />
               </a>
             )}
             {project.github && (

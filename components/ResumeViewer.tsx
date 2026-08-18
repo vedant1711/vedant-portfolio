@@ -1,5 +1,6 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 import { profile } from "@/lib/data";
 
@@ -52,7 +53,7 @@ export default function ResumeViewer() {
             className="inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
           >
             <DownloadIcon />
-            Download {current.short}
+            Download PDF
           </a>
           <a
             href={current.file}
@@ -60,31 +61,39 @@ export default function ResumeViewer() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-md border border-line px-4 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-accent hover:text-accent"
           >
-            Open <ExternalIcon />
-          </a>
-          <a
-            href={profile.resumeDrive}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-md border border-line px-4 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-accent hover:text-accent"
-          >
-            All on Drive <ExternalIcon />
+            Open PDF <ExternalIcon />
           </a>
         </div>
       </div>
 
-      {/* viewer */}
-      <div className="mt-6 h-[70dvh] min-h-[420px] overflow-hidden border border-line bg-ground">
-        <iframe
-          key={current.file}
-          src={`${current.file}#view=FitH`}
-          title={`${profile.name} resume, ${current.label}`}
-          className="h-full w-full"
-        />
-      </div>
-      <p className="mt-3 font-mono text-[11px] uppercase tracking-wider text-faint">
-        Trouble viewing? Use the download button above.
-      </p>
+      {/* the resume itself, rendered as the page it is. on narrow screens the
+          page stays at a legible width and pans sideways instead of shrinking
+          into unreadable type. */}
+      <figure className="mt-8">
+        <div className="mx-auto max-w-3xl overflow-x-auto">
+          <a
+            href={current.file}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Open the ${current.label} resume PDF`}
+            className="block w-[620px] border border-line bg-white shadow-[0_1px_0_var(--line),0_24px_60px_-32px_rgba(0,0,0,0.45)] transition-colors hover:border-accent/60 sm:w-full"
+          >
+            <img
+              key={current.preview}
+              src={current.preview}
+              alt={`${profile.name} resume, ${current.label} version`}
+              width={1428}
+              height={2021}
+              className="h-auto w-full"
+            />
+          </a>
+        </div>
+        <figcaption className="mx-auto mt-4 max-w-3xl font-mono text-[11px] uppercase tracking-wider text-faint">
+          {current.label} resume · one page ·{" "}
+          <span className="sm:hidden">swipe to read, tap to open the PDF</span>
+          <span className="hidden sm:inline">click to open the PDF</span>
+        </figcaption>
+      </figure>
     </div>
   );
 }

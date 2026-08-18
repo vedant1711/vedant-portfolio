@@ -41,11 +41,11 @@ export default function Home() {
               <p className="mono-label">{profile.name}</p>
               <Reveal>
                 <h1 className="mt-5 text-[clamp(2.6rem,8.5vw,5.7rem)] font-semibold leading-[0.95] tracking-tight text-ink">
-                  Machine learning
+                  Agents, data,
                   <br />
-                  and NLP, built
+                  and software
                   <br />
-                  to <span className="text-accent">ship.</span>
+                  that <span className="text-accent">ships.</span>
                 </h1>
               </Reveal>
               <Reveal delay={0.08}>

@@ -29,7 +29,7 @@ export default function ContactPage() {
         index="06"
         kicker="Say hello"
         title="Let us build something together."
-        description="I am open to new-grad and internship roles for 2027, research collaborations, and interesting problems in ML, NLP, and agentic AI."
+        description="I am open to new-grad and internship roles for 2027 across AI, software engineering, and data science, plus research collaborations and any interesting problem in agents, data, or production systems."
       />
 
       <section className="px-5 py-14 sm:px-8 sm:py-20">

@@ -2,17 +2,17 @@ export const profile = {
   name: "Vedant Somani",
   first: "Vedant",
   initials: "VS",
-  role: "Text Mining Research Analyst",
-  roleShort: "ML / NLP Engineer",
-  org: "UW eScience Institute",
+  role: "Text Mining Specialist",
+  roleShort: "AI & software engineer",
+  org: "UW Libraries & eScience Institute",
   location: "Seattle, WA",
   email: "vedants0@uw.edu",
   status: "Open to 2027 new-grad and internship roles",
   available: true,
   tagline:
-    "I turn large, messy text into working software: NLP pipelines, agentic AI systems, and the full-stack products around them.",
+    "I build AI systems, data pipelines, and the production software around them — then measure whether they actually work.",
   intro:
-    "I am a machine learning and NLP engineer at the University of Washington. Most of my work sits where research questions meet software that actually ships.",
+    "I am a software and AI engineer at the University of Washington. I build agents, retrieval systems, and data pipelines, ship the full-stack products around them, and hold the results to numbers that survive scrutiny.",
   links: {
     github: "https://github.com/vedant1711",
     linkedin: "https://www.linkedin.com/in/vedant-somani17/",
@@ -20,8 +20,8 @@ export const profile = {
     researchgate: "https://www.researchgate.net/profile/Vedant-Somani-4",
   },
   facts: [
-    { k: "Role", v: "ML / NLP Engineer" },
-    { k: "Focus", v: "Text mining · Agentic AI" },
+    { k: "Role", v: "AI & Software Engineer" },
+    { k: "Focus", v: "Agents · Data · Backend" },
     { k: "Based in", v: "Seattle, WA" },
     { k: "Status", v: "Open to 2027 roles" },
   ],
@@ -36,18 +36,18 @@ export const profile = {
       label: "Software Engineering",
       short: "SWE",
       file: "/resume/Vedant_Somani_Resume_SWE.pdf",
+      preview: "/resume/Vedant_Somani_Resume_SWE.png",
     },
     {
       label: "Data Science",
       short: "DS",
       file: "/resume/Vedant_Somani_Resume_DS.pdf",
+      preview: "/resume/Vedant_Somani_Resume_DS.png",
     },
   ],
-  resumeDrive:
-    "https://drive.google.com/drive/folders/1Y0njxZw_-NLnMY0unBbHS5VUX8fT75W_",
   about: [
-    "I am a Master's student in Information Management at the University of Washington, where I hold a 4.0 GPA, and a text mining specialist at the eScience Institute. I use machine learning and data science to pull structure and meaning out of large, messy text, and I care most about solutions that ship and hold up at scale.",
-    "Before Seattle I spent a few years across machine learning and full-stack engineering, building systems end to end: collecting data, processing it, training models, and putting them into production. These days I am most drawn to agentic AI and how it can take slow, manual research work and make it fast, structured, and repeatable.",
+    "I am a Master's student in Information Management at the University of Washington, where I hold a 4.0 GPA, and a text mining specialist at UW Libraries and the eScience Institute. My work sits across three things that are really one thing: the AI system, the data underneath it, and the software that has to keep both running.",
+    "Before Seattle I spent a few years across machine learning and full-stack engineering, building systems end to end — collecting data, processing it, training models, and putting them into production with the APIs, infrastructure, and CI around them. These days I am most drawn to agentic AI, and to the harder half of it: proving a system got better rather than asserting it did.",
   ],
 };
 
@@ -58,24 +58,28 @@ export type Experience = {
   to: string;
   year: string;
   current?: boolean;
+  logo?: string;
+  logoAlt?: string;
   stack: string[];
   bullets: string[];
 };
 
 export const experience: Experience[] = [
   {
-    role: "Text Mining Research Analyst",
+    role: "Text Mining Specialist",
     company: "UW Libraries & eScience Institute",
     from: "Mar 2026",
     to: "Present",
     year: "2026",
     current: true,
-    stack: ["spaCy", "BERT", "Haystack", "RAG", "pandas"],
+    logo: "/logos/experience_logos/uw-escience.jpeg",
+    logoAlt: "University of Washington eScience Institute logo",
+    stack: ["Python", "RAG", "Haystack", "NLP", "PostgreSQL", "Pytest"],
     bullets: [
-      "Built scalable NLP ingestion pipelines with spaCy and pandas that clean, normalize, and deduplicate more than 100,000 scholarly documents, cutting downstream preprocessing time by 40%.",
-      "Used BERT models to extract structured entities and semantic relationships from raw research corpora, making over 50,000 records searchable by meaning rather than keywords.",
-      "Wired up Haystack retrieval-augmented generation to surface the most relevant passages from large archives, cutting manual research query time for library staff by roughly 30%.",
-      "Currently building Open IRE with UW Libraries and the Scientific Software Engineering Center, an automated pipeline that collects, rights-classifies, and preserves close to 400,000 UW-authored articles in the ResearchWorks repository.",
+      "Ingested 50,000+ of a 400,000-article target into Open IRE, an automated pipeline I built to collect, rights-classify, and preserve UW-authored articles, owning the database schema and system architecture.",
+      "Recovered 6,800+ missing documents by building a custom exponential-backoff retry middleware and fixing a self-duplicate dedup bug behind a scraping pipeline failure, validated with a 295-test end-to-end suite.",
+      "Improved recall@5 by 14pp on a 500-query eval set by redesigning RAG chunking from fixed 512-token windows to a sentence-anchored sliding window at 20% overlap, then shipped it as a Haystack service that cut manual research query time roughly 30%.",
+      "Instructed at the AI in Practice Summer Institute, teaching applied AI workflows to researchers and library staff.",
     ],
   },
   {
@@ -84,10 +88,12 @@ export const experience: Experience[] = [
     from: "Jan 2025",
     to: "Jul 2025",
     year: "2025",
-    stack: ["React Native", "Django", "PostgreSQL", "AWS"],
+    logo: "/logos/experience_logos/os-technology.png",
+    logoAlt: "OS Technology Services logo",
+    stack: ["React Native", "Django", "PostgreSQL", "WebSocket", "AWS"],
     bullets: [
-      "Built a cross-platform mobile app, My Dj Live, with real-time event engagement features in React Native and Django, making live events more interactive and easier to scale.",
-      "Deployed the AWS infrastructure behind it (EC2, Fargate, CloudWatch) with CI/CD automation, over-the-air updates, and Crashlytics and DataDog analytics to keep the app reliable in production.",
+      "Supported 500+ concurrent users per event over WebSocket at ~200 ms latency and lifted session length 25%, engineering My Dj Live, a cross-platform app with real-time engagement in React Native against a Django REST API.",
+      "Held 99.9% uptime and 99.5% crash-free sessions while cutting deploy time 40%, deploying the AWS infrastructure (EC2, Fargate, CloudWatch) with CI/CD automation, over-the-air updates, and Crashlytics and DataDog analytics.",
     ],
   },
   {
@@ -96,10 +102,12 @@ export const experience: Experience[] = [
     from: "Mar 2024",
     to: "Sep 2024",
     year: "2024",
-    stack: ["PyTorch", "Hugging Face", "FastAPI", "Docker"],
+    logo: "/logos/experience_logos/xenon-nation.jpeg",
+    logoAlt: "Xenon Nation logo",
+    stack: ["PyTorch", "ONNX", "FastAPI", "Docker", "AWS ECS"],
     bullets: [
-      "Improved sentiment-analysis F1 by 18% by fine-tuning BERT models with Hugging Face Transformers and PyTorch on AWS EC2.",
-      "Cut processing latency by 35%, about 250 ms, by designing a transformer-based summarization pipeline and serving it as FastAPI microservices with Docker on AWS ECS.",
+      "Cut inference latency 35%, about 250 ms, by exporting models to ONNX and adding response caching in FastAPI microservices deployed via Docker on AWS ECS.",
+      "Boosted sentiment F1 by 18 points, 74% to 87%, fine-tuning cardiffnlp/twitter-roberta-base-sentiment through a custom PyTorch training loop, reaching 89% precision and 85% recall on review data.",
     ],
   },
   {
@@ -108,6 +116,8 @@ export const experience: Experience[] = [
     from: "Sep 2023",
     to: "Feb 2024",
     year: "2023",
+    logo: "/logos/experience_logos/hemansai.svg",
+    logoAlt: "HemansAI logo",
     stack: ["Scikit-learn", "Django REST", "PostgreSQL", "Redis"],
     bullets: [
       "Raised model accuracy by 15% through feature engineering, cross-validation, and hyperparameter tuning across the predictive-analytics workflow.",
@@ -120,6 +130,8 @@ export const experience: Experience[] = [
     from: "2023",
     to: "2025",
     year: "2023",
+    logo: "/logos/experience_logos/acm.svg",
+    logoAlt: "ACM logo",
     stack: ["Leadership", "Hackathons", "Workshops", "IoT"],
     bullets: [
       "Led the AITR ACM Students Chapter, running the institute's flagship technical events and growing an active community of student developers, designers, and builders.",
@@ -137,12 +149,75 @@ export type Project = {
   stack: string[];
   github?: string;
   live?: string;
+  liveLabel?: string;
   featured?: boolean;
   image?: string;
   imageAlt?: string;
 };
 
 export const projects: Project[] = [
+  {
+    name: "Vegapunk",
+    image: "/media/projects/vegapunk.png",
+    imageAlt:
+      "Vegapunk live trace UI streaming a seven-step agent run, with the Best-of-N coder generating three candidate patches",
+    subtitle: "Autonomous AI code agent",
+    featured: true,
+    description: [
+      "Give it a GitHub issue URL and it gives you back a pull request. A seven-node LangGraph pipeline clones the repo, classifies the issue, plans the fix, writes the code, runs the tests, self-reviews its own diff, and opens the PR — streaming every step to a live trace UI over Server-Sent Events.",
+      "Two mechanics carry it. A tree-sitter code graph ranked by keyword overlap blended with PageRank lifted bug-file localization to 83%, and a Best-of-N coder generates K candidate diffs in parallel, tests each in its own isolated git worktree, and keeps the one that passes. It also ships an MCP server, so Claude Code, Cursor, and Cline can query the repo graph directly.",
+    ],
+    stack: ["LangGraph", "FastAPI", "Next.js", "tree-sitter", "MCP", "Docker"],
+    github: "https://github.com/vedant1711/Vegapunk-Agentic-AI-Code-Agent",
+    live: "https://vegapunk-agentic-ai-code-agent.vercel.app",
+  },
+  {
+    name: "AgentGate",
+    image: "/media/projects/agentgate.png",
+    imageAlt: "AgentGate landing page, a statistical CI gate for LLM agents",
+    subtitle: "Statistical CI gate for LLM agents · Open source",
+    featured: true,
+    description: [
+      "Your agent scored 79% this week and 100% last week. Did you break it, or did it have a bad day? AgentGate answers with statistics instead of a guess: paired non-inferiority tests, cluster-robust standard errors, and Benjamini–Hochberg correction across 42 metrics, which cut false regression alarms from about 87% to 5%.",
+      "The verdict no threshold rule can give is UNDERPOWERED — reported with the minimum effect the suite could actually have detected, so a small test set gets an honest answer instead of a fake green tick. Benchmarking two open models across 666 runs and 4.5M tokens on τ²-bench exposed a 9× gap between how coherent a model sounds (0.99) and how often it finishes the job (0.11).",
+    ],
+    stack: ["Python", "SciPy", "LiteLLM", "DuckDB", "OpenTelemetry", "LLM Evals"],
+    github: "https://github.com/vedant1711/agentgate",
+    live: "https://vedant1711.github.io/agentgate/",
+    liveLabel: "Demo",
+  },
+  {
+    name: "NanoScale-LM",
+    image: "/media/projects/nanoscale.png",
+    imageAlt:
+      "NanoScale-LM browser demo generating text and explaining the model's next-token distribution",
+    subtitle: "A language model built from scratch, then compressed",
+    featured: true,
+    description: [
+      "A decoder-only language model written from first principles in PyTorch — byte-level BPE, GQA, RoPE, QK-norm, SwiGLU, and Muon's Newton–Schulz orthogonalization — plus the full efficiency stack needed to actually serve it: distillation, GPTQ quantization, and speculative decoding. No high-level trainer library appears anywhere in the source.",
+      "Every claim is a measurement from a committed script, stamped with the git SHA and hardware behind it: Muon reaching the target in 53 steps against AdamW's 106 across five seeds, distillation shrinking the model 17.7×, and speculative decoding cutting target forward passes 3× with the output distribution provably unchanged. The results that went the wrong way are written up too.",
+    ],
+    stack: ["PyTorch", "Transformers", "Quantization", "Distillation", "mypy --strict"],
+    github: "https://github.com/vedant1711/nanoscale-lm",
+    live: "https://vedant1711.github.io/nanoscale-lm/demo.html",
+    liveLabel: "Demo",
+  },
+  {
+    name: "Uplift Retention",
+    image: "/media/projects/uplift.png",
+    imageAlt:
+      "The uplift targeting Streamlit app explaining which customers are worth contacting",
+    subtitle: "Causal uplift modeling for retention targeting",
+    featured: true,
+    description: [
+      "Ranking customers by who is likely to buy puts the people you cannot influence at the top. This pipeline estimates the effect of contacting each person instead — five CATE estimators (S, T, X, and DR learners against a response-model baseline) scored by Qini and validated against synthetic data where every customer's true effect is known.",
+      "The finding that reframes it: on a real 64,000-customer randomized email campaign the right answer is to contact almost everyone, because an email is nearly free. So the pipeline computes the number that does matter — how expensive an intervention has to get before targeting changes the decision — and an eight-page Streamlit app puts the two assumptions behind sliders.",
+    ],
+    stack: ["Python", "Causal Inference", "scikit-learn", "MLflow", "Streamlit", "Docker"],
+    github: "https://github.com/vedant1711/uplift-retention-project",
+    live: "https://uplift-retention-project.streamlit.app",
+    liveLabel: "App",
+  },
   {
     name: "Open IRE",
     image: "/media/projects/openire.jpg",
@@ -151,38 +226,26 @@ export const projects: Project[] = [
     status: "In progress",
     featured: true,
     description: [
-      "An initiative I am building as an SSEC engineer with UW Libraries. It automatically collects, rights-classifies, and preserves close to 400,000 scholarly articles written by UW researchers in the ResearchWorks repository, designed as a model other universities can adopt.",
-      "The pipeline pulls publications scattered across federal repositories like PubMed Central and ERIC, sorts each one by rights status (covered by UW's open-access policy, Creative Commons, or needs review), and has gathered around 50,000 articles so far. The schema and architecture are built to scale to the full collection.",
+      "An initiative I am building with UW Libraries and the Scientific Software Engineering Center. It automatically collects, rights-classifies, and preserves close to 400,000 scholarly articles written by UW researchers in the ResearchWorks repository, designed as a model other universities can adopt. I own the database schema and system architecture.",
+      "The pipeline pulls publications scattered across federal repositories like PubMed Central and ERIC, sorts each one by rights status (covered by UW's open-access policy, Creative Commons, or needs review), and has ingested more than 50,000 articles so far — including 6,800 recovered by custom retry middleware after a scraping failure, all guarded by a 295-test end-to-end suite.",
     ],
-    stack: ["Python", "Pixi", "Data Pipelines", "Open Access"],
+    stack: ["Python", "PostgreSQL", "Pixi", "Data Pipelines", "Pytest"],
     live: "https://escience.washington.edu/open-ire-increasing-access-to-published-research/",
+    liveLabel: "Read more",
   },
   {
     name: "ResolveIQ",
     image: "/media/projects/resolveiq.png",
     imageAlt: "ResolveIQ developer dashboard with ticket analytics and knowledge-base drafts",
-    subtitle: "AI incident knowledge management",
+    subtitle: "AI incident knowledge management · Dempsey finalist",
     featured: true,
     description: [
-      "An event-driven microservices platform so engineering teams never solve the same incident twice. It turns resolved Jira tickets into clean Confluence knowledge-base articles by pulling in the surrounding Slack and Zoom context, which removes the manual write-up step entirely.",
-      "A semantic retrieval engine built on Voyage AI embeddings, Pinecone vector search, and GPT-4o surfaces the right article inline in Jira, cutting mean time to resolution for recurring issues by about 30%.",
+      "An event-driven microservices platform so engineering teams never solve the same incident twice. It turns resolved Jira tickets into clean Confluence knowledge-base articles by pulling in the surrounding Slack and Zoom context, removing about 90% of the manual write-up work.",
+      "A semantic retrieval engine built on Voyage AI embeddings, Pinecone vector search, and GPT-4o surfaces the right article inline in Jira, cutting mean time to resolution for recurring issues by an estimated 30%.",
     ],
     stack: ["LangChain", "FastAPI", "Pinecone", "GPT-4o", "Next.js", "Django"],
     github: "https://github.com/vedant1711/ResolveIQ_Project",
     live: "https://resolve-iq-project.vercel.app",
-  },
-  {
-    name: "Vegapunk",
-    image: "/media/projects/vegapunk.png",
-    imageAlt: "Vegapunk dashboard with seven agents processing a GitHub issue in real time",
-    subtitle: "Autonomous AI code agent",
-    featured: true,
-    description: [
-      "A fully autonomous path from GitHub issue to pull request. A seven-node LangGraph multi-agent system running on NVIDIA NIM models reads the code, plans a fix, writes the change, runs the tests, and opens a PR, correcting itself when tests fail.",
-      "A real-time event bus streams more than 19 live agent events to a Next.js dashboard, with code running in a Docker sandbox and a baseline-aware test comparison so pre-existing failures never block a valid fix.",
-    ],
-    stack: ["LangGraph", "NVIDIA NIM", "FastAPI", "Next.js", "Docker"],
-    github: "https://github.com/vedant1711/Vegapunk-Agentic-AI-Code-Agent",
   },
   {
     name: "Atlas",
@@ -222,7 +285,7 @@ export const projects: Project[] = [
   },
   {
     name: "FarmFit",
-    subtitle: "Smart precision farming platform",
+    subtitle: "Smart precision farming platform · IEEE ACROSET 2025",
     description: [
       "An IoT and machine learning platform that adjusts watering and fertilization from live sensor data, improving irrigation efficiency by 26% and lifting crop yield by 11%.",
       "A predictive fertilizer-recommendation model served through Django on AWS, paired with a React Native dashboard for live monitoring and remote control. Published at IEEE ACROSET 2025.",
@@ -247,6 +310,7 @@ export const skillGroups: SkillGroup[] = [
     skills: [
       { name: "Python", icon: "python" },
       { name: "C++", icon: "cpp" },
+      { name: "C#", icon: "csharp" },
       { name: "Java", icon: "java" },
       { name: "JavaScript", icon: "javascript" },
       { name: "TypeScript", icon: "typescript" },
@@ -255,50 +319,78 @@ export const skillGroups: SkillGroup[] = [
       { name: "MySQL", icon: "mysql" },
       { name: "PostgreSQL", icon: "postgresql" },
       { name: "MongoDB", icon: "mongodb" },
+      { name: "DuckDB", icon: "duckdb", invert: true },
       { name: "Pinecone" },
-    ],
-  },
-  {
-    label: "Machine Learning & Data",
-    skills: [
-      { name: "PyTorch", icon: "pytorch" },
-      { name: "TensorFlow", icon: "tensorflow" },
-      { name: "Scikit-learn", icon: "scikitlearn" },
-      { name: "NumPy", icon: "numpy" },
-      { name: "Pandas", icon: "pandas" },
-      { name: "Matplotlib", icon: "matplotlib" },
-      { name: "OpenCV", icon: "opencv" },
-      { name: "Apache Spark", icon: "spark" },
-      { name: "Apache Kafka", icon: "kafka", invert: true },
-      { name: "Hadoop", icon: "hadoop" },
-      { name: "Snowflake", icon: "snowflake" },
-      { name: "Scala", icon: "scala" },
-      { name: "MATLAB", icon: "matlab" },
     ],
   },
   {
     label: "AI & Agents",
     skills: [
-      { name: "Claude API", icon: "anthropic", invert: true },
+      { name: "Claude Code", icon: "anthropic", invert: true },
+      { name: "Cursor", icon: "cursor", invert: true },
+      { name: "GitHub Copilot", icon: "githubcopilot", invert: true },
       { name: "OpenAI GPT-4o", icon: "openai", invert: true },
+      { name: "Gemini", icon: "googlegemini" },
+      { name: "NVIDIA NIM", icon: "nvidia" },
+      { name: "Ollama", icon: "ollama", invert: true },
       { name: "LangChain", icon: "langchain" },
       { name: "LangGraph", icon: "langgraph" },
-      { name: "Hugging Face", icon: "huggingface" },
-      { name: "Haystack", icon: "haystack" },
+      { name: "LangSmith" },
       { name: "LlamaIndex" },
       { name: "CrewAI", icon: "crewai" },
       { name: "AutoGen" },
+      { name: "Haystack", icon: "haystack" },
       { name: "MCP", icon: "mcp", invert: true },
+      { name: "Hugging Face", icon: "huggingface" },
       { name: "RAG Pipelines" },
+      { name: "Multi-Agent Systems" },
+      { name: "Tool Calling" },
       { name: "BERT" },
     ],
   },
   {
-    label: "Frameworks & Web",
+    label: "Evaluation & Observability",
+    skills: [
+      { name: "LLM Evals" },
+      { name: "RAGAS" },
+      { name: "DeepEval" },
+      { name: "Phoenix" },
+      { name: "OpenTelemetry", icon: "opentelemetry", invert: true },
+      { name: "MLflow", icon: "mlflow" },
+    ],
+  },
+  {
+    label: "Machine Learning & Data Science",
+    skills: [
+      { name: "PyTorch", icon: "pytorch" },
+      { name: "TensorFlow", icon: "tensorflow" },
+      { name: "Scikit-learn", icon: "scikitlearn" },
+      { name: "XGBoost" },
+      { name: "NumPy", icon: "numpy" },
+      { name: "Pandas", icon: "pandas" },
+      { name: "SciPy", icon: "scipy" },
+      { name: "Matplotlib", icon: "matplotlib" },
+      { name: "ONNX", icon: "onnx" },
+      { name: "OpenCV", icon: "opencv" },
+      { name: "Causal Inference" },
+      { name: "Apache Spark", icon: "spark" },
+      { name: "PySpark", icon: "spark" },
+      { name: "Apache Kafka", icon: "kafka", invert: true },
+      { name: "Hadoop", icon: "hadoop" },
+      { name: "Snowflake", icon: "snowflake" },
+      { name: "Scala", icon: "scala" },
+      { name: "MATLAB", icon: "matlab" },
+      { name: "Streamlit", icon: "streamlit" },
+      { name: "Tableau", icon: "tableau", invert: true },
+    ],
+  },
+  {
+    label: "Software & Web",
     skills: [
       { name: "FastAPI", icon: "fastapi" },
       { name: "Django", icon: "django", darkIcon: "django-dark" },
       { name: "React", icon: "react" },
+      { name: "React Native", icon: "react" },
       { name: "Next.js", icon: "nextjs", invert: true },
       { name: "Node.js", icon: "nodejs" },
     ],
@@ -309,11 +401,13 @@ export const skillGroups: SkillGroup[] = [
       { name: "AWS", icon: "aws", darkIcon: "aws-dark" },
       { name: "Azure", icon: "azure" },
       { name: "Docker", icon: "docker" },
+      { name: "Kubernetes", icon: "kubernetes" },
+      { name: "Linux", icon: "linux", invert: true },
       { name: "Git", icon: "git" },
       { name: "GitHub", icon: "github", invert: true },
+      { name: "GitHub Actions", icon: "githubactions" },
       { name: "Postman", icon: "postman" },
       { name: "Jira", icon: "jira" },
-      { name: "Tableau", icon: "tableau", invert: true },
       { name: "Figma", icon: "figma" },
     ],
   },
@@ -336,8 +430,15 @@ export const achievements: Achievement[] = [
     linkLabel: "Read the story",
   },
   {
+    title: "Instructor, AI in Practice Summer Institute",
+    detail:
+      "Taught applied AI workflows to researchers and library staff at the University of Washington.",
+    kind: "award",
+  },
+  {
     title: "iEngage Hackathon",
-    detail: "Runner-up at the Salesforce and Lovable hackathon. Built Atlas, an agentic student success portal.",
+    detail:
+      "Runner-up at the Salesforce and Lovable hackathon. Built Atlas, an agentic student success portal.",
     kind: "award",
     link: "https://atlas-compass-buddy.vercel.app",
     linkLabel: "Try the project live",

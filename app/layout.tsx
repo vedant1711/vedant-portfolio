@@ -25,15 +25,15 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://vedant-portfolio.vercel.app"),
   title: {
-    default: "Vedant Somani — ML / NLP Engineer",
+    default: "Vedant Somani — AI & Software Engineer",
     template: "%s — Vedant Somani",
   },
   description:
-    "Vedant Somani is a machine learning and NLP engineer at the UW eScience Institute. He builds text mining pipelines, agentic AI systems, and full-stack products.",
+    "Vedant Somani is an AI and software engineer at UW Libraries and the eScience Institute. He builds agentic AI systems, data pipelines, and the full-stack products around them.",
   openGraph: {
-    title: "Vedant Somani — ML / NLP Engineer",
+    title: "Vedant Somani — AI & Software Engineer",
     description:
-      "Machine learning and NLP engineer at the UW eScience Institute, building text mining pipelines, agentic AI systems, and full-stack products.",
+      "AI and software engineer at the University of Washington, building agentic AI systems, data pipelines, and the full-stack products around them.",
     type: "website",
   },
 };

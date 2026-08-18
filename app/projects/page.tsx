@@ -8,7 +8,7 @@ import { profile, projects } from "@/lib/data";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Selected work by Vedant Somani: research pipelines, agentic AI systems, and full-stack products.",
+    "Selected work by Vedant Somani: agentic AI systems, evaluation and data-science pipelines, and full-stack products.",
 };
 
 export default function ProjectsPage() {
@@ -18,7 +18,7 @@ export default function ProjectsPage() {
         index="04"
         kicker="Selected work"
         title="Things I have designed, built, and shipped."
-        description="Research pipelines, autonomous agents, and full-stack products. A few are live, a few are competition builds, and one is running in production at UW."
+        description="Autonomous agents, evaluation and causal-inference pipelines, language models built from scratch, and full-stack products. Most are live and open source, and one is running in production at UW."
       />
 
       <section className="px-5 py-14 sm:px-8 sm:py-20">

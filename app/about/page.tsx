@@ -16,7 +16,7 @@ import {
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Vedant Somani is a machine learning and NLP engineer at the UW eScience Institute, working where research questions meet software that ships.",
+    "Vedant Somani is an AI and software engineer at the University of Washington, working across agents, data, and the production software that carries them.",
 };
 
 const kinds = [
@@ -31,7 +31,7 @@ export default function AboutPage() {
       <PageHeader
         index="02"
         kicker="Who I am"
-        title="Research questions, met with working software."
+        title="One engineer, three overlapping problems."
         description={profile.tagline}
       />
 
@@ -163,8 +163,8 @@ export default function AboutPage() {
       <section className="border-t border-line px-5 py-14 sm:px-8 sm:py-20">
         <SectionLabel n="05">Community &amp; talks</SectionLabel>
         <p className="mt-6 max-w-2xl text-muted">
-          Beyond the commit log: hackathons I have judged, workshops I have
-          taught, and the communities that shaped how I build.
+          Beyond the commit log: hackathons I have judged, workshops and
+          institutes I have taught, and the communities that shaped how I build.
         </p>
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {highlights.map((h, i) => (

@@ -18,7 +18,7 @@ export default function SiteFooter() {
         <div className="px-5 py-14 sm:px-8 sm:py-20">
           <p className="mono-label">Get in touch</p>
           <h2 className="mt-4 max-w-3xl font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
-            Have a problem worth solving? Let us talk.
+            Have a system worth building? Let us talk.
           </h2>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link
@@ -92,16 +92,6 @@ export default function SiteFooter() {
                   </a>
                 </li>
               ))}
-              <li>
-                <a
-                  href={profile.resumeDrive}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted transition-colors hover:text-accent"
-                >
-                  All resumes (Drive)
-                </a>
-              </li>
             </ul>
           </div>
         </div>

@@ -5,7 +5,7 @@ import ResumeViewer from "@/components/ResumeViewer";
 export const metadata: Metadata = {
   title: "Resume",
   description:
-    "View and download Vedant Somani's resume, tailored for software engineering or data science roles.",
+    "Read and download Vedant Somani's resume, in a software engineering and a data science version.",
 };
 
 export default function ResumePage() {
@@ -15,7 +15,7 @@ export default function ResumePage() {
         index="05"
         kicker="Curriculum vitae"
         title="Resume."
-        description="Two versions, depending on the role. Read either one below, download it, or grab every variant from my Drive."
+        description="Two versions, depending on the role. Read either one in full below, or download it."
       />
 
       <section className="px-5 py-12 sm:px-8 sm:py-16">
