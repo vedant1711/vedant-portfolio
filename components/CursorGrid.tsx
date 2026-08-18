@@ -45,7 +45,16 @@ export default function CursorGrid() {
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
-    function draw() {
+    // the rendering is a pure function of these, so an idle frame can be
+    // skipped entirely instead of redrawing the same grid every 16ms
+    let last = "";
+    function draw(force = false) {
+      const key = `${mouse.active ? Math.round(mouse.x) : -1}|${
+        mouse.active ? Math.round(mouse.y) : -1
+      }|${W}|${H}|${colors.dot}|${colors.accent}`;
+      if (!force && key === last) return;
+      last = key;
+
       ctx!.clearRect(0, 0, W, H);
 
       // crosshair
@@ -95,12 +104,12 @@ export default function CursorGrid() {
     function start() {
       cancelAnimationFrame(raf);
       if (visible && !reduce) raf = requestAnimationFrame(loop);
-      else draw();
+      else draw(true);
     }
 
     readColors();
     setup();
-    draw();
+    draw(true);
     if (!reduce) start();
 
     const onMove = (e: MouseEvent) => {
@@ -115,7 +124,7 @@ export default function CursorGrid() {
     };
     const onResize = () => {
       setup();
-      draw();
+      draw(true);
     };
     const onVisibility = () => {
       visible = !document.hidden;
@@ -127,6 +136,12 @@ export default function CursorGrid() {
     window.addEventListener("resize", onResize);
     document.addEventListener("visibilitychange", onVisibility);
 
+    const ro = new ResizeObserver(() => {
+      setup();
+      draw(true);
+    });
+    if (canvas.parentElement) ro.observe(canvas.parentElement);
+
     const io = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
       start();
@@ -135,7 +150,7 @@ export default function CursorGrid() {
 
     const mo = new MutationObserver(() => {
       readColors();
-      draw();
+      draw(true);
     });
     mo.observe(document.documentElement, {
       attributes: true,
@@ -150,6 +165,7 @@ export default function CursorGrid() {
       document.removeEventListener("visibilitychange", onVisibility);
       io.disconnect();
       mo.disconnect();
+      ro.disconnect();
     };
   }, []);
 
