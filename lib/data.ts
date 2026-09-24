@@ -172,6 +172,21 @@ export const projects: Project[] = [
     live: "https://vegapunk-agentic-ai-code-agent.vercel.app",
   },
   {
+    name: "Alter Ego",
+    image: "/media/projects/alterego.png",
+    imageAlt:
+      "Alter Ego replying in the user's voice, beside the live knowledge graph and the memories behind the reply tagged by retrieval leg",
+    subtitle: "Digital twin with hybrid graph + vector + keyword memory",
+    featured: true,
+    description: [
+      "A digital twin that remembers what you tell it and writes back in your voice. Every message fans out to three retrievers at once — a Neo4j knowledge graph, Qdrant vectors, and a BM25 keyword index — and the interface shows both halves of that as it happens: the graph growing live, and the exact memories behind each reply, tagged by which leg surfaced them.",
+      "The three legs score on incomparable scales, so results fuse by rank rather than by score. That rewards agreement, which has a failure mode worth naming: it buries the leg that overlaps least, dropping the graph's terse triples and the structural facts with them — so every leg that found something is guaranteed a slot. Memory text is Fernet-encrypted with per-session HKDF-derived keys, and every external store is optional, falling back to an in-process equivalent so the app degrades instead of failing.",
+    ],
+    stack: ["FastAPI", "Neo4j", "Qdrant", "BM25", "Gemini", "React"],
+    github: "https://github.com/vedant1711/alter-ego",
+    live: "https://alter-ego-wheat.vercel.app",
+  },
+  {
     name: "AgentGate",
     image: "/media/projects/agentgate.png",
     imageAlt: "AgentGate landing page, a statistical CI gate for LLM agents",
@@ -238,7 +253,6 @@ export const projects: Project[] = [
     image: "/media/projects/resolveiq.png",
     imageAlt: "ResolveIQ developer dashboard with ticket analytics and knowledge-base drafts",
     subtitle: "AI incident knowledge management · Dempsey finalist",
-    featured: true,
     description: [
       "An event-driven microservices platform so engineering teams never solve the same incident twice. It turns resolved Jira tickets into clean Confluence knowledge-base articles by pulling in the surrounding Slack and Zoom context, removing about 90% of the manual write-up work.",
       "A semantic retrieval engine built on Voyage AI embeddings, Pinecone vector search, and GPT-4o surfaces the right article inline in Jira, cutting mean time to resolution for recurring issues by an estimated 30%.",
@@ -320,6 +334,8 @@ export const skillGroups: SkillGroup[] = [
       { name: "PostgreSQL", icon: "postgresql" },
       { name: "MongoDB", icon: "mongodb" },
       { name: "DuckDB", icon: "duckdb", invert: true },
+      { name: "Neo4j", icon: "neo4j" },
+      { name: "Qdrant", icon: "qdrant" },
       { name: "Pinecone" },
     ],
   },
